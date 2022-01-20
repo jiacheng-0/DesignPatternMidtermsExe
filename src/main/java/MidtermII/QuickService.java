@@ -10,30 +10,31 @@ public class QuickService implements QuickServiceInterface {
     }
 
     @Override
-    public void add(ServiceInterface service){
+    public void add(ServiceInterface service) {
         QuickServiceInterface c = this;
-        while(c.getNext()!=null){
+        while (c.getNext() != null) {
             c = c.getNext();
         }
         c.setNext(service);
     }
 
     @Override
-    public QuickServiceInterface getNext(){
-        return  nextService;
+    public QuickServiceInterface getNext() {
+        return nextService;
     }
 
     @Override
-    public void setNext(ServiceInterface service){
+    public void setNext(ServiceInterface service) {
         nextService = new QuickService();
         nextService.setService(service);
     }
 
     @Override
     public void invokeService(Command command) {
-        if(currService != null){
+        if (currService != null) {
             currService.processService(command);
-            if (nextService!=null) nextService.invokeService(command);
+            if (nextService != null)
+                nextService.invokeService(command);
         }
     }
 }
